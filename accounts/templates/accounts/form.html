@@ -24,13 +24,13 @@
     <!-- Content -->
     <div id="content" class="colM">
 <div id="content-main">
-<form action="/admin/login/?next=/admin/" method="post" id="login-form"><input type='hidden' name='csrfmiddlewaretoken' value='n0zAU1xy261W53NWi041CFlvB0GeDomlWOT9jaNkHJq1s2Tl1Zg9zMVpUuZFkxzy' />
+<form action="" method="post" id="login-form">
+  {% csrf_token %}
   <div class="form-row">
     <label class="required" for="id_username">Username:</label> <input type="text" name="username" autofocus required id="id_username" maxlength="254" />
   </div>
   <div class="form-row">
     <label class="required" for="id_password">Password:</label> <input type="password" name="password" required id="id_password" />
-    <input type="hidden" name="next" value="/admin/" />
   </div>
 
 
