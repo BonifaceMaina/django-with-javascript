@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>GreenShoe Ltd</title>
+    <!-- loading the css files -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'listcustomers/style.css' %}" />
+    <script src="{% static 'listcustomers/style.js' %}"></script>
+  </head>
+  <body>
+    <!-- checking if user is authenticated before displaying the table -->
+    {% if user.is_authenticated %}
+    <div class="container-fluid">
+      <header role="banner" id="fh5co-header">
+        <!-- <div class="row"> -->
+          <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-header">
+              <!-- Mobile Toggle Menu Button -->
+
+                <a class="navbar-brand" href="">Saida</a>
+
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="" class="pull-right" data-nav-section="press" onClick="exportTableToCSV('borrowers.xlsx')" >Export as Excel</a></li>
+                <li>
+                  <a href="{% url 'logout' %}">
+                    Logout
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        <!-- </div> -->
+  </header>
+    </div>
+    <div class="container">
+
+<!-- iterating through the database rows -->
+      {% if customers %}
+      <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Name or ID Number" class="form-control col-md-4"/>
+      <div id="myTable">
+      <table class="table-striped" >
+        <tr>
+          <th>ID</th>
+          <th>Customer Name</th>
+          <th>Customer ID</th>
+          <th>Customer Acc.</th>
+          <th>Loan Amount</th>
+          <th>Loan Balance</th>
+          <th>Loan Issue Date</th>
+          <th>Loan Due Date</th>
+          <th>Customer Mobile Number</th>
+        </tr>
+      {% for customer in customers%}
+        <tr>
+            <td>
+              {{customer.id}}
+            </td>
+            <td>
+              {{customer.cust_name}}
+            </td>
+            <td>
+              {{customer.cust_id}}
+            </td>
+            <td>
+              {{customer.cust_acno}}
+            </td>
+            <td>
+              {{customer.loan_amount}}
+            </td>
+            <td>
+              {{customer.loan_balance}}
+            </td>
+            <td>
+              {{customer.loan_issue_date}}
+            </td>
+            <td>
+              {{customer.loan_due_date}}
+            </td>
+            <td>
+              {{customer.cust_mobile_number}}
+            </td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% endif %}
+    </div>
+
+    </div>
+    <!-- if the user is not authenticated -->
+    {% else %}
+    <h3>You have to <a href="{% url 'login' %}"> log in</a></h3>
+    {% endif %}
+  </body>
+</html>
